@@ -48,7 +48,13 @@ function loadData() {
 
     // WikiPedia AJAX request
     var wikipediaSearch = city;
-    var wikipediaURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + wikipediaSearch + '&format=json&callback=wikiCallback';
+    var wikipediaURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + wikipediaSearch + 
+        '&format=json&callback=wikiCallback';
+
+    // Display a message on a timeout of 8 seconds
+    var wikiRequestTimeout = setTimeout(function(){
+        $wikiElem.text("failed to get wikipedia resources");
+    }, 8000);
 
     $.ajax({
         url: wikipediaURL,
@@ -61,6 +67,9 @@ function loadData() {
                 var url = 'http://en.wikipedia.org/wiki/' + wikiArticle;
                 $wikiElem.append('<li><a href="' + url + '">' + wikiArticle + '</a></li>');
             }
+
+            // Clear timeout if it was initiated
+            clearTimeout(wikiRequestTimeout);
         }
     })
 
