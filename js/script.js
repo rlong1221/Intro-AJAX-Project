@@ -11,12 +11,11 @@ function loadData() {
     $wikiElem.text("");
     $nytElem.text("");
 
-    // load streetview
-
-    // YOUR CODE GOES HERE!
-    var str = '<img class="bgimg" src="http://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + $('#street').val() + ", " + $('#city').val() + '">';
+    var address = $('#street').val() + ", " + $('#city').val();
+    var str = '<img class="bgimg" src="http://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + address + '">';
     console.log(str);
 
+    $greeting.text('So, you want to live at ' + address + '?');
     $('body').append(str);
 
     return false;
